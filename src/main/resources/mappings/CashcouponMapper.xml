@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CashcouponMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Cashcoupon" >
+    <constructor >
+      <idArg column="cash_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="discount" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="preferential" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="start_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="end_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cash_id, name, discount, preferential, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cashcoupon
+    where cash_id = #{cashId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cashcoupon
+    where cash_id = #{cashId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Cashcoupon" >
+    insert into cashcoupon (cash_id, name, discount, 
+      preferential, start_time, end_time
+      )
+    values (#{cashId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{discount,jdbcType=REAL}, 
+      #{preferential,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Cashcoupon" >
+    insert into cashcoupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cashId != null" >
+        cash_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="preferential != null" >
+        preferential,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cashId != null" >
+        #{cashId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="preferential != null" >
+        #{preferential,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Cashcoupon" >
+    update cashcoupon
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="preferential != null" >
+        preferential = #{preferential,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+    </set>
+    where cash_id = #{cashId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Cashcoupon" >
+    update cashcoupon
+    set name = #{name,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=REAL},
+      preferential = #{preferential,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE}
+    where cash_id = #{cashId,jdbcType=INTEGER}
+  </update>
+</mapper>

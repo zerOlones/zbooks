@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.StaticstatusMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Staticstatus" >
+    <constructor >
+      <arg column="status_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.pojo.Staticstatus" >
+    insert into staticstatus (status_name, status_value)
+    values (#{statusName,jdbcType=VARCHAR}, #{statusValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Staticstatus" >
+    insert into staticstatus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="statusName != null" >
+        status_name,
+      </if>
+      <if test="statusValue != null" >
+        status_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="statusName != null" >
+        #{statusName,jdbcType=VARCHAR},
+      </if>
+      <if test="statusValue != null" >
+        #{statusValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

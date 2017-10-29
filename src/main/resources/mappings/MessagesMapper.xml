@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.MessagesMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Messages" >
+    <constructor >
+      <idArg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="send" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="receive" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="message" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="readed" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="send_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    message_id, send, receive, title, message, readed, send_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from messages
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from messages
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Messages" >
+    insert into messages (message_id, send, receive, 
+      title, message, readed, 
+      send_time)
+    values (#{messageId,jdbcType=INTEGER}, #{send,jdbcType=INTEGER}, #{receive,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, #{readed,jdbcType=INTEGER}, 
+      #{sendTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Messages" >
+    insert into messages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="send != null" >
+        send,
+      </if>
+      <if test="receive != null" >
+        receive,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="readed != null" >
+        readed,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="send != null" >
+        #{send,jdbcType=INTEGER},
+      </if>
+      <if test="receive != null" >
+        #{receive,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="readed != null" >
+        #{readed,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Messages" >
+    update messages
+    <set >
+      <if test="send != null" >
+        send = #{send,jdbcType=INTEGER},
+      </if>
+      <if test="receive != null" >
+        receive = #{receive,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="readed != null" >
+        readed = #{readed,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=DATE},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Messages" >
+    update messages
+    set send = #{send,jdbcType=INTEGER},
+      receive = #{receive,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      readed = #{readed,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=DATE}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+</mapper>

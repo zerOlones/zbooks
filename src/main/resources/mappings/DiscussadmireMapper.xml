@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DiscussadmireMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Discussadmire">
+    <constructor>
+      <idArg column="dis_ad_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="discuss_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="click_time" javaType="java.util.Date" jdbcType="DATE" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    dis_ad_id, user_id, discuss_id, click_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from discussadmire
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from discussadmire
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Discussadmire">
+    insert into discussadmire (dis_ad_id, user_id, discuss_id, 
+      click_time)
+    values (#{disAdId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{discussId,jdbcType=INTEGER}, 
+      #{clickTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Discussadmire">
+    insert into discussadmire
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disAdId != null">
+        dis_ad_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="discussId != null">
+        discuss_id,
+      </if>
+      <if test="clickTime != null">
+        click_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disAdId != null">
+        #{disAdId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="discussId != null">
+        #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null">
+        #{clickTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Discussadmire">
+    update discussadmire
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="discussId != null">
+        discuss_id = #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null">
+        click_time = #{clickTime,jdbcType=DATE},
+      </if>
+    </set>
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Discussadmire">
+    update discussadmire
+    set user_id = #{userId,jdbcType=INTEGER},
+      discuss_id = #{discussId,jdbcType=INTEGER},
+      click_time = #{clickTime,jdbcType=DATE}
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.pojo.Discussadmire">
+    <constructor>
+      <idArg column="dis_ad_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="discuss_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="click_time" javaType="java.util.Date" jdbcType="DATE" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    dis_ad_id, user_id, discuss_id, click_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from discussadmire
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from discussadmire
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Discussadmire">
+    insert into discussadmire (dis_ad_id, user_id, discuss_id, 
+      click_time)
+    values (#{disAdId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{discussId,jdbcType=INTEGER}, 
+      #{clickTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Discussadmire">
+    insert into discussadmire
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disAdId != null">
+        dis_ad_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="discussId != null">
+        discuss_id,
+      </if>
+      <if test="clickTime != null">
+        click_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disAdId != null">
+        #{disAdId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="discussId != null">
+        #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null">
+        #{clickTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Discussadmire">
+    update discussadmire
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="discussId != null">
+        discuss_id = #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null">
+        click_time = #{clickTime,jdbcType=DATE},
+      </if>
+    </set>
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Discussadmire">
+    update discussadmire
+    set user_id = #{userId,jdbcType=INTEGER},
+      discuss_id = #{discussId,jdbcType=INTEGER},
+      click_time = #{clickTime,jdbcType=DATE}
+    where dis_ad_id = #{disAdId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BookcatalogMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Bookcatalog" >
+    <constructor >
+      <idArg column="catalog_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="chapter_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="chapter_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="up_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="chapter_character" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="is_pay" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    catalog_id, chapter_id, book_id, chapter_name, content, up_time, chapter_character, 
+    is_pay
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bookcatalog
+    where catalog_id = #{catalogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bookcatalog
+    where catalog_id = #{catalogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Bookcatalog" >
+    insert into bookcatalog (catalog_id, chapter_id, book_id, 
+      chapter_name, content, up_time, 
+      chapter_character, is_pay)
+    values (#{catalogId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
+      #{chapterName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{upTime,jdbcType=DATE}, 
+      #{chapterCharacter,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Bookcatalog" >
+    insert into bookcatalog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="catalogId != null" >
+        catalog_id,
+      </if>
+      <if test="chapterId != null" >
+        chapter_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="chapterName != null" >
+        chapter_name,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="upTime != null" >
+        up_time,
+      </if>
+      <if test="chapterCharacter != null" >
+        chapter_character,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterId != null" >
+        #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterName != null" >
+        #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="upTime != null" >
+        #{upTime,jdbcType=DATE},
+      </if>
+      <if test="chapterCharacter != null" >
+        #{chapterCharacter,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Bookcatalog" >
+    update bookcatalog
+    <set >
+      <if test="chapterId != null" >
+        chapter_id = #{chapterId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="chapterName != null" >
+        chapter_name = #{chapterName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="upTime != null" >
+        up_time = #{upTime,jdbcType=DATE},
+      </if>
+      <if test="chapterCharacter != null" >
+        chapter_character = #{chapterCharacter,jdbcType=INTEGER},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where catalog_id = #{catalogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Bookcatalog" >
+    update bookcatalog
+    set chapter_id = #{chapterId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=INTEGER},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      up_time = #{upTime,jdbcType=DATE},
+      chapter_character = #{chapterCharacter,jdbcType=INTEGER},
+      is_pay = #{isPay,jdbcType=INTEGER}
+    where catalog_id = #{catalogId,jdbcType=INTEGER}
+  </update>
+</mapper>

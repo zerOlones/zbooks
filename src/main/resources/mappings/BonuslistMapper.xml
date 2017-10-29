@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BonuslistMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Bonuslist" >
+    <constructor >
+      <idArg column="income_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="income" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="catalog_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="p_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    income_id, book_id, user_id, income, catalog_id, p_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bonuslist
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bonuslist
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Bonuslist" >
+    insert into bonuslist (income_id, book_id, user_id, 
+      income, catalog_id, p_time
+      )
+    values (#{incomeId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{income,jdbcType=INTEGER}, #{catalogId,jdbcType=INTEGER}, #{pTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Bonuslist" >
+    insert into bonuslist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="incomeId != null" >
+        income_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="catalogId != null" >
+        catalog_id,
+      </if>
+      <if test="pTime != null" >
+        p_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="incomeId != null" >
+        #{incomeId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="pTime != null" >
+        #{pTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Bonuslist" >
+    update bonuslist
+    <set >
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        catalog_id = #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="pTime != null" >
+        p_time = #{pTime,jdbcType=DATE},
+      </if>
+    </set>
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Bonuslist" >
+    update bonuslist
+    set book_id = #{bookId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      income = #{income,jdbcType=INTEGER},
+      catalog_id = #{catalogId,jdbcType=INTEGER},
+      p_time = #{pTime,jdbcType=DATE}
+    where income_id = #{incomeId,jdbcType=INTEGER}
+  </update>
+</mapper>

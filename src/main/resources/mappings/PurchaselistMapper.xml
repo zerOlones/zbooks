@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.PurchaselistMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Purchaselist" >
+    <constructor >
+      <idArg column="purchase_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="catalog_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cash_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="deal_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="pay_money" jdbcType="REAL" javaType="java.lang.Float" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    purchase_id, user_id, catalog_id, book_id, cash_id, deal_time, pay_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchaselist
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchaselist
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Purchaselist" >
+    insert into purchaselist (purchase_id, user_id, catalog_id, 
+      book_id, cash_id, deal_time, 
+      pay_money)
+    values (#{purchaseId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{catalogId,jdbcType=INTEGER}, 
+      #{bookId,jdbcType=INTEGER}, #{cashId,jdbcType=INTEGER}, #{dealTime,jdbcType=DATE}, 
+      #{payMoney,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Purchaselist" >
+    insert into purchaselist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        purchase_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="catalogId != null" >
+        catalog_id,
+      </if>
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="cashId != null" >
+        cash_id,
+      </if>
+      <if test="dealTime != null" >
+        deal_time,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="cashId != null" >
+        #{cashId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=DATE},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Purchaselist" >
+    update purchaselist
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        catalog_id = #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="cashId != null" >
+        cash_id = #{cashId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        deal_time = #{dealTime,jdbcType=DATE},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=REAL},
+      </if>
+    </set>
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Purchaselist" >
+    update purchaselist
+    set user_id = #{userId,jdbcType=INTEGER},
+      catalog_id = #{catalogId,jdbcType=INTEGER},
+      book_id = #{bookId,jdbcType=INTEGER},
+      cash_id = #{cashId,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=DATE},
+      pay_money = #{payMoney,jdbcType=REAL}
+    where purchase_id = #{purchaseId,jdbcType=INTEGER}
+  </update>
+</mapper>

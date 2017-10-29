@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Book" >
+    <constructor >
+      <idArg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="author_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cover" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="book_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="book_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="write_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="score" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="thousand_pay" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="free" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pojo.BookWithBLOBs" >
+    <constructor >
+      <idArg column="book_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="book_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="author_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cover" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="book_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="book_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="write_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="score" jdbcType="REAL" javaType="java.lang.Float" />
+      <arg column="thousand_pay" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="free" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="all_varcharacter" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="click_num" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="read_num" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="income_num" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="income" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    book_id, book_name, author_id, cover, introduce, book_type, create_time, book_status, 
+    write_status, score, thousand_pay, free
+  </sql>
+  <sql id="Blob_Column_List" >
+    all_varcharacter, click_num, read_num, income_num, income
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.BookWithBLOBs" >
+    insert into book (book_id, book_name, author_id, 
+      cover, introduce, book_type, 
+      create_time, book_status, write_status, 
+      score, thousand_pay, free, 
+      all_varcharacter, click_num, read_num, 
+      income_num, income)
+    values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, 
+      #{cover,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{bookType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{bookStatus,jdbcType=INTEGER}, #{writeStatus,jdbcType=INTEGER}, 
+      #{score,jdbcType=REAL}, #{thousandPay,jdbcType=INTEGER}, #{free,jdbcType=INTEGER}, 
+      #{allVarcharacter,jdbcType=LONGVARCHAR}, #{clickNum,jdbcType=LONGVARCHAR}, #{readNum,jdbcType=LONGVARCHAR}, 
+      #{incomeNum,jdbcType=LONGVARCHAR}, #{income,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.BookWithBLOBs" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        book_id,
+      </if>
+      <if test="bookName != null" >
+        book_name,
+      </if>
+      <if test="authorId != null" >
+        author_id,
+      </if>
+      <if test="cover != null" >
+        cover,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="bookType != null" >
+        book_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="bookStatus != null" >
+        book_status,
+      </if>
+      <if test="writeStatus != null" >
+        write_status,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="thousandPay != null" >
+        thousand_pay,
+      </if>
+      <if test="free != null" >
+        free,
+      </if>
+      <if test="allVarcharacter != null" >
+        all_varcharacter,
+      </if>
+      <if test="clickNum != null" >
+        click_num,
+      </if>
+      <if test="readNum != null" >
+        read_num,
+      </if>
+      <if test="incomeNum != null" >
+        income_num,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bookId != null" >
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null" >
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="cover != null" >
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="bookType != null" >
+        #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="bookStatus != null" >
+        #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="writeStatus != null" >
+        #{writeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=REAL},
+      </if>
+      <if test="thousandPay != null" >
+        #{thousandPay,jdbcType=INTEGER},
+      </if>
+      <if test="free != null" >
+        #{free,jdbcType=INTEGER},
+      </if>
+      <if test="allVarcharacter != null" >
+        #{allVarcharacter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        #{clickNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="readNum != null" >
+        #{readNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="incomeNum != null" >
+        #{incomeNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.BookWithBLOBs" >
+    update book
+    <set >
+      <if test="bookName != null" >
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null" >
+        author_id = #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="cover != null" >
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="bookType != null" >
+        book_type = #{bookType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="bookStatus != null" >
+        book_status = #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="writeStatus != null" >
+        write_status = #{writeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=REAL},
+      </if>
+      <if test="thousandPay != null" >
+        thousand_pay = #{thousandPay,jdbcType=INTEGER},
+      </if>
+      <if test="free != null" >
+        free = #{free,jdbcType=INTEGER},
+      </if>
+      <if test="allVarcharacter != null" >
+        all_varcharacter = #{allVarcharacter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        click_num = #{clickNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="readNum != null" >
+        read_num = #{readNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="incomeNum != null" >
+        income_num = #{incomeNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pojo.BookWithBLOBs" >
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      cover = #{cover,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      book_type = #{bookType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      book_status = #{bookStatus,jdbcType=INTEGER},
+      write_status = #{writeStatus,jdbcType=INTEGER},
+      score = #{score,jdbcType=REAL},
+      thousand_pay = #{thousandPay,jdbcType=INTEGER},
+      free = #{free,jdbcType=INTEGER},
+      all_varcharacter = #{allVarcharacter,jdbcType=LONGVARCHAR},
+      click_num = #{clickNum,jdbcType=LONGVARCHAR},
+      read_num = #{readNum,jdbcType=LONGVARCHAR},
+      income_num = #{incomeNum,jdbcType=LONGVARCHAR},
+      income = #{income,jdbcType=LONGVARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Book" >
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      cover = #{cover,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      book_type = #{bookType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      book_status = #{bookStatus,jdbcType=INTEGER},
+      write_status = #{writeStatus,jdbcType=INTEGER},
+      score = #{score,jdbcType=REAL},
+      thousand_pay = #{thousandPay,jdbcType=INTEGER},
+      free = #{free,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

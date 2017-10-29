@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BookappraiseadmireMapper" >
+  <resultMap id="BaseResultMap" type="com.pojo.Bookappraiseadmire" >
+    <constructor >
+      <idArg column="app_ad_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="appraise_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="click_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    app_ad_id, user_id, appraise_id, click_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bookappraiseadmire
+    where app_ad_id = #{appAdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bookappraiseadmire
+    where app_ad_id = #{appAdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Bookappraiseadmire" >
+    insert into bookappraiseadmire (app_ad_id, user_id, appraise_id, 
+      click_time)
+    values (#{appAdId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{appraiseId,jdbcType=INTEGER}, 
+      #{clickTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Bookappraiseadmire" >
+    insert into bookappraiseadmire
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appAdId != null" >
+        app_ad_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="appraiseId != null" >
+        appraise_id,
+      </if>
+      <if test="clickTime != null" >
+        click_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appAdId != null" >
+        #{appAdId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appraiseId != null" >
+        #{appraiseId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null" >
+        #{clickTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Bookappraiseadmire" >
+    update bookappraiseadmire
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="appraiseId != null" >
+        appraise_id = #{appraiseId,jdbcType=INTEGER},
+      </if>
+      <if test="clickTime != null" >
+        click_time = #{clickTime,jdbcType=DATE},
+      </if>
+    </set>
+    where app_ad_id = #{appAdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Bookappraiseadmire" >
+    update bookappraiseadmire
+    set user_id = #{userId,jdbcType=INTEGER},
+      appraise_id = #{appraiseId,jdbcType=INTEGER},
+      click_time = #{clickTime,jdbcType=DATE}
+    where app_ad_id = #{appAdId,jdbcType=INTEGER}
+  </update>
+</mapper>
